@@ -1,13 +1,12 @@
-
-provider "aws" {
- region = "us-east-1"
-}
-
 terraform {
   backend "s3" {
     bucket         = "tfstate-tcfiap"
     key            = "terraform.tfstate"
     region         = "us-east-1"
+  }
+}
+provider "aws" {
+ region = "us-east-1"
 }
 
 resource "aws_vpc" "aws_postech_vpc" {
@@ -87,8 +86,6 @@ resource "aws_security_group" "aws_inbound_security_group" {
     protocol = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-
 }
 
 resource "aws_security_group" "database_security_group" {
@@ -127,13 +124,11 @@ resource "aws_db_instance" "db_postech_rds" {
   db_subnet_group_name = aws_db_subnet_group.db_subnet.id
   vpc_security_group_ids = [aws_security_group.database_security_group.id]
   db_name = "DeliverySystem"
-  
 }
 
 resource "aws_db_subnet_group" "db_subnet" {
     name = "dbsubnet"
     subnet_ids = [ aws_subnet.public_subnet_a.id , aws_subnet.public_subnet_b.id ]
-  
 }
 
 
