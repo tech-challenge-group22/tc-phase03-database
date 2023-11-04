@@ -24,7 +24,7 @@ jobs:
     - name: Terraform Init
       id: init
       run: |
-        terraform init
+        terraform init -force-copy
       
     - name: Terraform Plan
       run: terraform plan
