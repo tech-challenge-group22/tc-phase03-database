@@ -11,9 +11,6 @@ jobs:
     name: Deploy Database Infrastructure
     runs-on: ubuntu-latest
     steps:
-    - uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: "1.6.0"
 
     - name: Checkout Repo
       uses: actions/checkout@v3
