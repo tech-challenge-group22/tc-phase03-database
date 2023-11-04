@@ -1,8 +1,14 @@
 
 provider "aws" {
  region = "us-east-1"
- access_key = "AKIA25OHUHIRK2JSWOFY"
- secret_key = "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"
+}
+
+terraform {
+  backend "s3" {
+    bucket         = "tfstate-tcfiap-group22"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+  }
 }
 
 resource "aws_vpc" "aws_postech_vpc" {
@@ -180,3 +186,17 @@ resource "aws_dynamodb_table" "aws_products_tbl" {
 #     command = "mysql -h ${aws_db_instance.db_postech_rds.endpoint} -u ${var.db_username} -p ${var.db_password}  < script-rds.sql"
 #   }
 # }
+
+resource "aws_dynamodb_table" "order_queue" {
+  name           = "order_queue"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 5
+  write_capacity = 5
+
+  attribute {
+    name = "id"
+    type = "S"
+  }
+
+  hash_key = "id"
+}
