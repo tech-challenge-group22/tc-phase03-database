@@ -5,9 +5,10 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket         = "my-terraform-state-bucket"
+    bucket         = "tfstate-tcfiap-group22"
     key            = "path/to/my/key"
     region         = "us-east-1"
+  }
 }
 
 resource "aws_vpc" "aws_postech_vpc" {
