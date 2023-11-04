@@ -4,7 +4,6 @@ provider "aws" {
 }
 
 terraform {
-  required_version = "= 0.12.9"
   backend "s3" {
     bucket         = "tfstate-tcfiap-group22"
     key            = "terraform.tfstate"
