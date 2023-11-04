@@ -23,6 +23,9 @@ jobs:
       run: |
         terraform fmt
         terraform init -upgrade
+      
+    - name: Terraform Apply
+      run: terraform plan
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
